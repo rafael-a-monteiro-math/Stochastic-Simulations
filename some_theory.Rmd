@@ -1,0 +1,4 @@
+---
+title: "Some theory, and some references"
+---
+I don't intend to give full results in these notes. In shall refer to some books and papers as much as I can, without any pretension of giving th emost up to date references. 

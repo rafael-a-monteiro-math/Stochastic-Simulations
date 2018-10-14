@@ -1,0 +1,16 @@
+name: "Rafael Monteiro-website"
+output_dir: "."
+navbar:
+  title: "Notes and codes: a few remarks on stochastic simulations"
+  left:
+    - text: "Notes/simulations"
+      href: index.html
+    - text: "Links"
+      href: recommended_links.html
+    - text: "Back to R. Monteiro's website"
+      href: https://sites.google.com/view/rafaelmonteiro-math/home
+
+output:
+  html_document:
+    theme: flatly
+    css: style.css  

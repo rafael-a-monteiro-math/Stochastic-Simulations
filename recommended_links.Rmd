@@ -1,0 +1,27 @@
+---
+title: "Some theory, and some references"
+---
+I don't intend to give full results in these notes. In shall refer to some books and papers as much as I can, without any pretension of giving th emost up to date references. 
+
+## Coding
+ <!-- - __R:__ there are many nice refferences to R. I would definitely recommend the following websites. -->
+
+
+ <!-- - __Matlab:__ Cleve Moler's notes are a gem in the field. But if you just want to put your hands directly on something, just take a look at the examples in ... -->
+
+ <!-- - __Python:__ as a script language, Python is much easier to learn than C or Java. If you want to do Machine Learning then, that's the perfect choice (not the same if you do Molecular Dynamics though: many people in the field of material sciences, engineers included,  are  still coding in Fortran).  -->
+
+ <!-- - __Sage:__ Sage is a symbolic computations language. Believe it or not, it is used by many pure mathematicians working in algebra and algebraic geometry! It has some private software counterparts, like Mathematica. I like it because it is good and, overall, it is free :)  -->
+ 
+## Markov chains and stochastic simulations
+
+<!-- Maybe the best reference for Markov chains is the classical book by Norris: -->
+
+<!--  - Markov Chains,  -->
+
+<!--  With regards to stochastic simulations, one can refer to old books by Ross and ...  -->
+
+<!--  For Monte Carlo methods, there are many possibilities. These methods are used a lot by physicists, and they are the biggest developers of these techniques.  -->
+
+
+
