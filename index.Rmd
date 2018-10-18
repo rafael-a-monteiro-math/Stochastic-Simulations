@@ -7,7 +7,7 @@
  I will post here  some stochastic simulations I have been running, with an ultimate goal of sharing some ideas and codes on Simulated Annealing. A few remarks before we start:
 
 - I don't claim originality for the results posted here: these are mostly some quick experiments I did while doing research. 
-- I jump and use many programming languages and softwares. Some codes are in python, some are in R, some are in Matlab and, whenever symbolic computation is necessary, I use Sage. Even if you don't know any of the sintax used in one of these languages, it is very simple to read these codes and start coding your own things :) 
+- I jump back and forth between  programming languages and softwares: some codes are in python, some are in R, some are in Matlab and, whenever symbolic computation is necessary, I use Sage. Even if you don't know any of the sintax used in one of these languages, it is very simple to read these codes and start coding your own things :) 
 
 ## Some notes and codes
 
