@@ -7,3 +7,4 @@ setwd("/Users/rafaelmonteiro/Dropbox/Matham-oil/R-markdown-website/Stochastic-Si
 #render your sweet site. 
 rmarkdown::render_site()
 
+
