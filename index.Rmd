@@ -12,9 +12,4 @@
 ## Some notes and codes
 
 - [An example of the rejection method](Rejection_method.html) ([pdf version](Rejection_method.pdf))
-- Markov chains and a quick note on its implementation using a sorting algorithm (to be added)
-- Some notes on Monte Carlo computations (to be added)
-- Some notes on simulated annealing (to be added)
-<!-- - __Name:__ Nick -->
-<!-- - __Ocupation:__ "Student" -->
-<!-- - __Hobbies:__ Learning software development instead of studying for exams.  -->
+- [A quick example of simulated annealing](Simulated annealing/Simulated annealing.html) ([pdf version](Simulated annealing/Simulated annealing.pdf)) 
