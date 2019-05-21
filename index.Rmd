@@ -13,3 +13,4 @@
 
 - [An example of the rejection method](Rejection_method.html) ([pdf version](Rejection_method.pdf))
 - [A quick example of simulated annealing](Simulated annealing/Simulated annealing.html) ([pdf version](Simulated annealing/Simulated annealing.pdf)) 
+- [A quick comparison between the previous result using simulated annealing and gradient descent]() ([pdf version](Gradient Descent/gradient_descent.pdf)) 
