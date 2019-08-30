@@ -14,3 +14,8 @@
 - [An example of the rejection method](Rejection_method.html) ([pdf version](Rejection_method.pdf))
 - [A quick example of simulated annealing](Simulated annealing/Simulated annealing.html) ([pdf version](Simulated annealing/Simulated annealing.pdf)) 
 - [A quick comparison between the previous result using simulated annealing and gradient descent]() ([pdf version](Gradient Descent/gradient_descent.pdf)) 
+
+For the following, it is helpful if, besides python,  you know a little bit of tensorflow (the code is "almost self explanatory", but it is always helpful if you have been previously exposed to tensorflow's idea)
+
+- [Weight evolution and mass shuffling in a shallow NN](Weight_evolution_shallow_NN/Weight_evolution_in_shallow_NN.html) ([pdf version](Weight_evolution_shallow_NN/Weight_evolution_in_shallow_NN.pdf))
+([jupyter-notebook version](Weight_evolution_shallow_NN/Weight_evolution_in_shallow_NN.ipyb))

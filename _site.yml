@@ -1,7 +1,7 @@
 name: "Rafael Monteiro-website"
 output_dir: "."
 navbar:
-  title: "Notes and codes: a few remarks on stochastic simulations"
+  title: "Notes and codes: a few remarks on Machine Learning and stochastic simulations"
   left:
     - text: "Notes/simulations"
       href: index.html
