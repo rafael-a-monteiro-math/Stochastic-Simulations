@@ -19,3 +19,8 @@ For the following, it is helpful if, besides python,  you know a little bit of t
 
 - [Weight evolution and mass shuffling in a shallow NN](Weight_evolution_shallow_NN/Weight_evolution_in_shallow_NN.html) ([pdf version](Weight_evolution_shallow_NN/Weight_evolution_in_shallow_NN.pdf))
 ([jupyter-notebook version](Weight_evolution_shallow_NN/Weight_evolution_in_shallow_NN.ipyb))
+
+The next notebook is a continuation of the previous one. Instead of using classical backpropagation, we use a probabilistic way to choose new weights
+
+- [Weight evolution and mass shuffling in a shallow NN: a random walk approach](Weight_evolution_in_shallow_NN-random_walking/Weight_evolution_in_shallow_NN-random_walking.html) ([pdf version](Weight_evolution_in_shallow_NN-random_walking/Weight_evolution_in_shallow_NN-random_walking.pdf))
+([jupyter-notebook version](Weight_evolution_in_shallow_NN-random_walking/Weight_evolution_in_shallow_NN-random_walking.ipynb))
