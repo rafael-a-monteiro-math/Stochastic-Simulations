@@ -7,7 +7,7 @@
  I will post here  some stochastic simulations I have been running, with an ultimate goal of sharing some ideas and codes on Simulated Annealing. A few remarks before we start:
 
 - I don't claim originality for the results posted here: these are mostly some quick experiments I did while doing research. 
-- I jump back and forth between  programming languages and softwares: some codes are in python, some are in R, some are in Matlab and, whenever symbolic computation is necessary, I use Sage. Even if you don't know any of the sintax used in one of these languages, it is very simple to read these codes and start coding your own things :) 
+- I jump back and forth between  programming languages and softwares: some codes are in python, some are in R, some are in Matlab and, whenever symbolic computation is necessary, I use Sage. Even if you don't know any of the sintax used in one of these languages, it is very simple to read these codes and start coding your own things :)  For ML I will mostly use Python, which is one of the best languages for that purpose.
 
 ## Some notes and codes
 
@@ -24,3 +24,11 @@ The next notebook is a continuation of the previous one. Instead of using classi
 
 - [Weight evolution and mass shuffling in a shallow NN: a random walk approach](Weight_evolution_in_shallow_NN-random_walking/Weight_evolution_in_shallow_NN-random_walking.html) ([pdf version](Weight_evolution_in_shallow_NN-random_walking/Weight_evolution_in_shallow_NN-random_walking.pdf))
 ([jupyter-notebook version](Weight_evolution_in_shallow_NN-random_walking/Weight_evolution_in_shallow_NN-random_walking.ipynb))
+
+Inthe next notebook is short we run a  [Convolution Neural Network (CNN)](https://en.wikipedia.org/wiki/Convolutional_neural_network) in order to do predictions in a supervised learning problem. Later on, through dimensional reduction (which will be explained in the notebook), we run a Neural Network prediction model in a lower dimensional manifold which, due to its "high quality", ends up providing good information for a prediction algorithm as good or even more efficient than CNN.
+
+For this program we use [__Keras__](https://keras.io) and (very little) Tensorflow.
+
+- [Convolution Neural Networks, dimensional reduction, and comparison with NNs](CNNs_NNs/Comparing_CNN_and_NN_in_reduced_dimension_model.html) ([pdf version](CNNs_NNs/Comparing_CNN_and_NN_in_reduced_dimension_model.pdf))
+([jupyter-notebook version](CNNs_NNs/Comparing_CNN_and_NN_in_reduced_dimension_model.ipynb))
+
