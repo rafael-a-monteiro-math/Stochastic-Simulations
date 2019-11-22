@@ -32,3 +32,10 @@ For this program we use [__Keras__](https://keras.io) and (very little) Tensorfl
 - [Convolution Neural Networks, dimensional reduction, and comparison with NNs](CNNs_NNs/Comparing_CNN_and_NN_in_reduced_dimension_model.html) ([pdf version](CNNs_NNs/Comparing_CNN_and_NN_in_reduced_dimension_model.pdf))
 ([jupyter-notebook version](CNNs_NNs/Comparing_CNN_and_NN_in_reduced_dimension_model.ipynb))
 
+The following note concerns LASSO, Ridge regression, and Least squares regression. It can be also be seen, and that's the perspective that I adopt in the notes, as a 1 layer NN where one forgets to use an activation function. 
+There is also an interesting issue regarding to symmetry, labeling, and penalization. For this study we only use standard libraries (sklearn and numpy).
+
+- [Ridge regression, Least squares, and Lasso](Lasso_RidReg_LeasSq/Lasso_Least_squares_and_Ridge_regression.html) ([pdf version](Lasso_RidReg_LeasSq/Lasso_Least_squares_and_Ridge_regression.pdf))
+([jupyter-notebook version](Lasso_RidReg_LeasSq/Lasso_Least_squares_and_Ridge_regression.ipynb))
+
+
