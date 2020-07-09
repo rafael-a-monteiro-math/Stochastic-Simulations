@@ -39,3 +39,10 @@ There is also an interesting issue regarding to symmetry, labeling, and penaliza
 ([jupyter-notebook version](Lasso_RidReg_LeasSq/Lasso_Least_squares_and_Ridge_regression.ipynb))
 
 
+I recently read an interesting (old) paper by Daniel Hillis, [Co-evolving parasites improve simulated evolution as an optimization procedure](https://www.sciencedirect.com/science/article/pii/0167278990900762), on the idea of co-evolving parasites applied on an optimization problem. I decided to play a bit with it.  This is somehow related to the above post on weight evolution and mass shuffling, but the heuristics for parameter search is way more interesting than the one I had designed therein.
+Nevertheless, they parallel in the sense that both are stochastic algorithms,  and  "Backpropagation-free".
+
+
+- [Training an Artificial Neural Network using a Genetic Algorithm](Genetic_Algorithms/ga_ANN.html) ([pdf version](Genetic_Algorithms/ga_ANN.pdf))
+([jupyter-notebook version](Genetic_Algorithms/ga_ANN.ipynb))([markdown-version](Genetic_Algorithms/ga_ANN.md))
+
