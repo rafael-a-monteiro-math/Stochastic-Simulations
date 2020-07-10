@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
 
-<title>index.utf8.md</title>
+<title></title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -84,7 +84,6 @@ code {
 }
 img {
   max-width:100%;
-  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
@@ -233,6 +232,7 @@ $(document).ready(function () {
   border: none;
   display: inline-block;
   border-radius: 4px;
+  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -244,18 +244,6 @@ $(document).ready(function () {
   display: none;
 }
 </style>
-
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
-  });
-});
-</script>
 
 <!-- code folding -->
 
@@ -319,8 +307,8 @@ $(document).ready(function () {
 <h1></h1>
 <p>I will post here some stochastic simulations I have been running, with an ultimate goal of sharing some ideas and codes on Simulated Annealing. A few remarks before we start:</p>
 <ul>
-<li>I don’t claim originality for the results posted here: these are mostly some quick experiments I did while doing research.</li>
-<li>I jump back and forth between programming languages and softwares: some codes are in python, some are in R, some are in Matlab and, whenever symbolic computation is necessary, I use Sage. Even if you don’t know any of the sintax used in one of these languages, it is very simple to read these codes and start coding your own things :) For ML I will mostly use Python, which is one of the best languages for that purpose.</li>
+<li>I don't claim originality for the results posted here: these are mostly some quick experiments I did while doing research.</li>
+<li>I jump back and forth between programming languages and softwares: some codes are in python, some are in R, some are in Matlab and, whenever symbolic computation is necessary, I use Sage. Even if you don't know any of the sintax used in one of these languages, it is very simple to read these codes and start coding your own things :) For ML I will mostly use Python, which is one of the best languages for that purpose.</li>
 </ul>
 <div id="some-notes-and-codes" class="section level2">
 <h2>Some notes and codes</h2>
@@ -329,7 +317,7 @@ $(document).ready(function () {
 <li><a href="Simulated%20annealing/Simulated%20annealing.html">A quick example of simulated annealing</a> (<a href="Simulated%20annealing/Simulated%20annealing.pdf">pdf version</a>)</li>
 <li><a href="">A quick comparison between the previous result using simulated annealing and gradient descent</a> (<a href="Gradient%20Descent/gradient_descent.pdf">pdf version</a>)</li>
 </ul>
-<p>For the following, it is helpful if, besides python, you know a little bit of tensorflow (the code is “almost self explanatory”, but it is always helpful if you have been previously exposed to tensorflow’s idea)</p>
+<p>For the following, it is helpful if, besides python, you know a little bit of tensorflow (the code is &quot;almost self explanatory&quot;, but it is always helpful if you have been previously exposed to tensorflow's idea)</p>
 <ul>
 <li><a href="Weight_evolution_shallow_NN/Weight_evolution_in_shallow_NN.html">Weight evolution and mass shuffling in a shallow NN</a> (<a href="Weight_evolution_shallow_NN/Weight_evolution_in_shallow_NN.pdf">pdf version</a>) (<a href="Weight_evolution_shallow_NN/Weight_evolution_in_shallow_NN.ipyb">jupyter-notebook version</a>)</li>
 </ul>
@@ -337,18 +325,18 @@ $(document).ready(function () {
 <ul>
 <li><a href="Weight_evolution_in_shallow_NN-random_walking/Weight_evolution_in_shallow_NN-random_walking.html">Weight evolution and mass shuffling in a shallow NN: a random walk approach</a> (<a href="Weight_evolution_in_shallow_NN-random_walking/Weight_evolution_in_shallow_NN-random_walking.pdf">pdf version</a>) (<a href="Weight_evolution_in_shallow_NN-random_walking/Weight_evolution_in_shallow_NN-random_walking.ipynb">jupyter-notebook version</a>)</li>
 </ul>
-<p>Inthe next notebook is short we run a <a href="https://en.wikipedia.org/wiki/Convolutional_neural_network">Convolution Neural Network (CNN)</a> in order to do predictions in a supervised learning problem. Later on, through dimensional reduction (which will be explained in the notebook), we run a Neural Network prediction model in a lower dimensional manifold which, due to its “high quality”, ends up providing good information for a prediction algorithm as good or even more efficient than CNN.</p>
+<p>Inthe next notebook is short we run a <a href="https://en.wikipedia.org/wiki/Convolutional_neural_network">Convolution Neural Network (CNN)</a> in order to do predictions in a supervised learning problem. Later on, through dimensional reduction (which will be explained in the notebook), we run a Neural Network prediction model in a lower dimensional manifold which, due to its &quot;high quality&quot;, ends up providing good information for a prediction algorithm as good or even more efficient than CNN.</p>
 <p>For this program we use <a href="https://keras.io"><strong>Keras</strong></a> and (very little) Tensorflow.</p>
 <ul>
 <li><a href="CNNs_NNs/Comparing_CNN_and_NN_in_reduced_dimension_model.html">Convolution Neural Networks, dimensional reduction, and comparison with NNs</a> (<a href="CNNs_NNs/Comparing_CNN_and_NN_in_reduced_dimension_model.pdf">pdf version</a>) (<a href="CNNs_NNs/Comparing_CNN_and_NN_in_reduced_dimension_model.ipynb">jupyter-notebook version</a>)</li>
 </ul>
-<p>The following note concerns LASSO, Ridge regression, and Least squares regression. It can be also be seen, and that’s the perspective that I adopt in the notes, as a 1 layer NN where one forgets to use an activation function. There is also an interesting issue regarding to symmetry, labeling, and penalization. For this study we only use standard libraries (sklearn and numpy).</p>
+<p>The following note concerns LASSO, Ridge regression, and Least squares regression. It can be also be seen, and that's the perspective that I adopt in the notes, as a 1 layer NN where one forgets to use an activation function. There is also an interesting issue regarding to symmetry, labeling, and penalization. For this study we only use standard libraries (sklearn and numpy).</p>
 <ul>
 <li><a href="Lasso_RidReg_LeasSq/Lasso_Least_squares_and_Ridge_regression.html">Ridge regression, Least squares, and Lasso</a> (<a href="Lasso_RidReg_LeasSq/Lasso_Least_squares_and_Ridge_regression.pdf">pdf version</a>) (<a href="Lasso_RidReg_LeasSq/Lasso_Least_squares_and_Ridge_regression.ipynb">jupyter-notebook version</a>)</li>
 </ul>
-<p>I recently read an interesting (old) paper by Daniel Hillis, <a href="https://www.sciencedirect.com/science/article/pii/0167278990900762">Co-evolving parasites improve simulated evolution as an optimization procedure</a>, on the idea of co-evolving parasites applied on an optimization problem. I decided to play a bit with it. This is somehow related to the above post on weight evolution and mass shuffling, but the heuristics for parameter search is way more interesting than the one I had designed therein. Nevertheless, they parallel in the sense that both are stochastic algorithms, and “Backpropagation-free”.</p>
+<p>I recently read an interesting (old) paper by Daniel Hillis, <a href="https://www.sciencedirect.com/science/article/pii/0167278990900762">Co-evolving parasites improve simulated evolution as an optimization procedure</a>, on the idea of co-evolving parasites applied on an optimization problem. I decided to play a bit with it. This is somehow related to the above post on weight evolution and mass shuffling, but the heuristics for parameter search is way more interesting than the one I had designed therein. Nevertheless, they parallel in the sense that both are stochastic algorithms, and &quot;Backpropagation-free&quot;.</p>
 <ul>
-<li><a href="Genetic_Algorithms/ga_ANN.html">Training an Artificial Neural Network using a Genetic Algorithm</a> (<a href="Genetic_Algorithms/ga_ANN.pdf">pdf version</a>) (<a href="Genetic_Algorithms/ga_ANN.ipynb">jupyter-notebook version</a>)(<a href="Genetic_Algorithms/ga_ANN.md">markdown-version</a>)</li>
+<li><a href="Genetic_Algorithms/ga_ANN.html">Training an Artificial Neural Network using a Genetic Algorithm</a> (<a href="Genetic_Algorithms/ga_ANN.pdf">pdf version</a>) (<a href="Genetic_Algorithms/ga_ANN.ipynb">jupyter-notebook version</a>)(<a href="Genetic_Algorithms/_book/index.html">markdown-version</a>)</li>
 </ul>
 </div>
 </div>
@@ -370,6 +358,23 @@ $(document).ready(function () {
 
 
 </script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
