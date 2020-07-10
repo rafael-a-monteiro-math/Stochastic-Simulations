@@ -149,7 +149,7 @@ ax[1].plot(history.history['loss'], c = 'b')
 
 Genetic Algorithms (GA) are somehow inspired by biological plenomena. I will not dwell on the topic that much, just referring briefly to the properties you should know of:
     
-> it is a sequence of nucleotidis, which as smaller units they are made of. You can imagine it as a vector, where each entry of the vector is a nucleotidis. In general the number of nucleotides is finite, but here we shall allow them to assume any value in the real line.
+> [Genome:](https://en.wikipedia.org/wiki/Gene) it is a sequence of nucleotidis, which as smaller units they are made of. You can imagine it as a vector, where each entry of the vector is a nucleotidis. In general the number of nucleotides is finite, but here we shall allow them to assume any value in the real line.
 ><br><br>
 >[Mutation:](https://en.wikipedia.org/wiki/Mutation) it consists of a random change that may happen to any entry in a genome. 
 ><br>
@@ -645,14 +645,16 @@ plt.show()
 
 <img src="output_66_0.png" alt="png," style="zoom:150%;" />
 
+In summary, we can get results that are even better than those using the "classical" backpropagation approach. Notice that this is heavily dependant on the fact that the problem is not that high dimensional, i.e., not many parameters to tubne by optimization. For high dimensional problems a hybrid approach is probably more apropriate. 
+
+
 
 ## Final remarks: can we improve these results?
 
 Surely we can! I will leave some ideas below, you can try to find others. I also strongly recommend Hillis' paper: it is full of nice ideas. 
 
 > 1. **Varying $\beta$:** in the function "beta_softmax" there is a parameter beta. It plays the role of the Boltzmann constant (that's what inspired me, actually), which is proportional to 1/T, where T is the temperature. The idea could be to take $T \downarrow 0$, in what is known as quenching. In each epoch we could lower T a little (hence making $\beta$ a bit larger). Physically, doing it too fast is known as quenching, whereas doing it slowly is known as anneling. Some people call it "tempering". As an optimization technique, this idea became widespread after an interesting paper by Fitzpatrick and others in the 80s.
-2. **Desing different crossovers:** I only did one type, where we choose a point in the genome and cut. But why not crossing over in many different points? That would be possible too
-3. **Diminishing the mutation probability and crossover probability through time**: this is similar to the idea 1.
-
+> 2. **Desing different crossovers:** I only did one type, where we choose a point in the genome and cut. But why not crossing over in many different points? That would be possible too.
+> 3. **Diminishing the mutation probability and crossover probability through time**: this is similar to the idea 1.
 The range of possibilities is enormous. If you are really interested you should take a look at Hillis' paper and at the MIT OCW reference. 
 
