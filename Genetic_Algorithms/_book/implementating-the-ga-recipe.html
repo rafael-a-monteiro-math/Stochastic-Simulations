@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2 Implementating the GA &quot;recipe&quot; | Training an Artificial Neural Network using a genetic algorithm</title>
+  <meta name="description" content="This is a brief note on training ANNs using an stochastic approach, 'backpropagation-free', based on genetic algorithms" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2 Implementating the GA &quot;recipe&quot; | Training an Artificial Neural Network using a genetic algorithm" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a brief note on training ANNs using an stochastic approach, 'backpropagation-free', based on genetic algorithms" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2 Implementating the GA &quot;recipe&quot; | Training an Artificial Neural Network using a genetic algorithm" />
+  
+  <meta name="twitter:description" content="This is a brief note on training ANNs using an stochastic approach, 'backpropagation-free', based on genetic algorithms" />
+  
+
+<meta name="author" content="Rafael Monteiro, Mathematics for Advanced Materials - Open Innovation Lab (MathAM-OIL)/Tohoku University, Sendai, Japan" />
+
+
+<meta name="date" content="2020-07-10" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Training an Artificial Neural Network using a genetic algorithm</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#the-classical-approach-using-anns"><i class="fa fa-check"></i><b>1.1</b> The classical approach using ANNs</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#genetic-algorithms"><i class="fa fa-check"></i><b>1.2</b> Genetic Algorithms</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#how-does-it-work"><i class="fa fa-check"></i><b>1.2.1</b> How does it work?</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#adding-a-little-bit-of-mathematics-to-the-discussion"><i class="fa fa-check"></i><b>1.3</b> Adding a little bit of mathematics to the discussion</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="implementating-the-ga-recipe.html"><a href="implementating-the-ga-recipe.html"><i class="fa fa-check"></i><b>2</b> Implementating the GA &quot;recipe&quot;</a><ul>
+<li class="chapter" data-level="2.1" data-path="implementating-the-ga-recipe.html"><a href="implementating-the-ga-recipe.html#propagate-the-model"><i class="fa fa-check"></i><b>2.1</b> Propagate the model</a></li>
+<li class="chapter" data-level="2.2" data-path="implementating-the-ga-recipe.html"><a href="implementating-the-ga-recipe.html#implementation"><i class="fa fa-check"></i><b>2.2</b> Implementation</a></li>
+<li class="chapter" data-level="2.3" data-path="implementating-the-ga-recipe.html"><a href="implementating-the-ga-recipe.html#final-remarks-can-we-improve-these-results"><i class="fa fa-check"></i><b>2.3</b> Final remarks: can we improve these results?</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Training an Artificial Neural Network using a genetic algorithm</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="implementating-the-ga-recipe" class="section level1">
+<h1><span class="header-section-number">2</span> Implementating the GA &quot;recipe&quot;</h1>
+<p>Let's start with the most basic things, which more than any math, involve some project development: we need to decide (i) how to store data and (ii) how to store them as genomes. We shall do the following: in the kth layer of an ANN we define the next element as follows:</p>
+<p><span class="math display">\[
+\label{ANN}
+Z^{[k+1]}= W^{[k]}\cdot Z^{[k]} + b^{[k]}; \quad A^{[k+1]} = \sigma(Z^{[k+1]}).\tag{3}
+\]</span> The function <span class="math inline">\(\sigma(\cdot)\)</span> is known as activation function, which in our case will be ReLu units in the hidden layers, and a sigmoid in the last layer. Parameters <span class="math inline">\(W^{[k]}\)</span> and <span class="math inline">\(b^{[k]}\)</span> are the weights (some people also call them &quot;weight and bias&quot;, respectively).</p>
+<p>Since we need to train several ANNs, we shall denote by <span class="math inline">\(W_j^{[k]}\)</span> the kth layer of the individual <span class="math inline">\(j\)</span>. We shall store all of them as a stack, a 3D array. For instance, if <span class="math inline">\(W_k\)</span> denotes this 3D matrix, then <span class="math inline">\(W[:,:,j]\)</span> corresponds to the matrix <span class="math inline">\(W_j^{[k]}\)</span>.</p>
+<p>With regards to genomes, we shall store them as a row vector. In this way, if we have a population with size <span class="math inline">\(N\)</span> and genomes of length <span class="math inline">\(l\)</span>, all the population genomes will be stored as a matrix <span class="math inline">\(G \in \mathbb{R}^{N\times l}\)</span>.</p>
+<p>In what follows, we separate the weights as two dictionaries: one contains <span class="math inline">\(W\)</span>, adn the other <span class="math inline">\(b\)</span> (see Equation <span class="math inline">\(\eqref{ANN}\)</span>).</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> Genomes_and_weights:
+    
+    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):
+        <span class="cf">pass</span>
+
+    <span class="kw">def</span> initialize_weights(<span class="va">self</span>, size, pop_size):
+        <span class="co">&quot;&quot;&quot;</span>
+<span class="co">        Initialize weights of pop_size ANNs.</span>
+<span class="co">        </span>
+<span class="co">        Arguments:</span>
+<span class="co">        ----------</span>
+<span class="co">        size :  array, where the jth entry correspond to the number of nodes in the jth layer of an ANN.</span>
+<span class="co">        pop_size : array, population size.</span>
+<span class="co">        &quot;&quot;&quot;</span>
+        
+        <span class="cf">assert</span>(pop_size<span class="op">%</span><span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>)
+        N <span class="op">=</span> <span class="bu">len</span>(size)
+        W, b <span class="op">=</span> {}, {}
+        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(N<span class="op">-</span><span class="dv">1</span>):
+            W[<span class="bu">str</span>(i)] <span class="op">=</span> np.asarray(
+                np.random.randn(size[i<span class="op">+</span><span class="dv">1</span>], size[i], pop_size), dtype <span class="op">=</span> <span class="st">&#39;float32&#39;</span>
+            )
+            b[<span class="bu">str</span>(i)] <span class="op">=</span> np.asarray(
+                np.random.randn(size[i<span class="op">+</span><span class="dv">1</span>], <span class="dv">1</span>, pop_size), dtype <span class="op">=</span> <span class="st">&#39;float32&#39;</span>
+            )
+        <span class="cf">return</span> W, b
+
+    <span class="kw">def</span> weights_to_genome(<span class="va">self</span>, W, b):
+        <span class="co">&quot;&quot;&quot;</span>
+<span class="co">        Convert weights to genomes, giving a dictionary as output.</span>
+<span class="co">        Ech layer W of size (a,b, pop_size) is converted to a matrix of size </span>
+<span class="co">        (pop_size, a*b).</span>
+<span class="co">        </span>
+<span class="co">        b has size (n_k, 1, pop_size), becoming a (pop_size, n_k).</span>
+<span class="co">        </span>
+<span class="co">        Arguments:</span>
+<span class="co">        ----------</span>
+<span class="co">        W : dictionary, with W weights (see Equation 3).</span>
+<span class="co">        b : dictionary, with b weights (see Equation 3).</span>
+<span class="co">        &quot;&quot;&quot;</span>
+        
+        N <span class="op">=</span> <span class="bu">len</span>(W.keys())
+        pop_size <span class="op">=</span> W[<span class="st">&quot;0&quot;</span>].shape[<span class="op">-</span><span class="dv">1</span>]
+        genome_W <span class="op">=</span> {}
+        genome_b <span class="op">=</span> {}
+        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(N):
+            genome_b[<span class="bu">str</span>(i)] <span class="op">=</span> np.transpose(np.array(np.squeeze(b[<span class="bu">str</span>(i)]), ndmin <span class="op">=</span> <span class="dv">2</span>))
+            genome_W[<span class="bu">str</span>(i)] <span class="op">=</span>  W[<span class="bu">str</span>(i)].reshape(<span class="op">-</span><span class="dv">1</span>, pop_size).T
+
+        <span class="cf">return</span> genome_W, genome_b
+
+    <span class="kw">def</span> genome_to_weights(<span class="va">self</span>, genome_W, genome_b, size):
+        <span class="co">&quot;&quot;&quot;</span>
+<span class="co">        Convert genomes back to weights.</span>
+<span class="co">        </span>
+<span class="co">        Arguments:</span>
+<span class="co">        ----------</span>
+<span class="co">        genome_W : dictionary, where the  component W of each layer is written as a genome (see Equation 3).</span>
+<span class="co">        genome_b : dictionary, where the  component b of each layer is written as a genome (see Equation 3).</span>
+<span class="co">        </span>
+<span class="co">        &quot;&quot;&quot;</span>
+        
+        N <span class="op">=</span> <span class="bu">len</span>(genome_W.keys())
+        pop_size <span class="op">=</span> genome_W[<span class="st">&quot;0&quot;</span>].shape[<span class="dv">0</span>]
+        W, b <span class="op">=</span> { }, { }
+        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(N):
+            W[<span class="bu">str</span>(i)] <span class="op">=</span>  genome_W[<span class="bu">str</span>(i)].reshape(pop_size, size[i<span class="op">+</span><span class="dv">1</span>], size[i])
+            W[<span class="bu">str</span>(i)] <span class="op">=</span> np.moveaxis(W[<span class="bu">str</span>(i)], <span class="dv">0</span>, <span class="op">-</span><span class="dv">1</span>)
+            
+            b[<span class="bu">str</span>(i)] <span class="op">=</span>  genome_b[<span class="bu">str</span>(i)].T
+            b[<span class="bu">str</span>(i)] <span class="op">=</span> b[<span class="bu">str</span>(i)].reshape(b[<span class="bu">str</span>(i)].shape[<span class="dv">0</span>], <span class="dv">1</span>, b[<span class="bu">str</span>(i)].shape[<span class="dv">1</span>])
+            
+        <span class="cf">return</span> W, b
+
+    <span class="kw">def</span> crossover(<span class="va">self</span>, W, p_c):
+        <span class="co">&quot;&quot;&quot;</span>
+<span class="co">        For every k in pop_size/2</span>
+<span class="co">        cross over W[2*k,:] and W[2*k+1,:]</span>
+<span class="co">        W is flat genome</span>
+<span class="co">        </span>
+<span class="co">        Arguments:</span>
+<span class="co">        ----------</span>
+<span class="co">        W : dictionary, with W weights (see Equation 3).</span>
+<span class="co">        p_c : probability of crossover.</span>
+<span class="co">        &quot;&quot;&quot;</span>
+        pop_size <span class="op">=</span> W[<span class="st">&quot;0&quot;</span>].shape[<span class="dv">0</span>]
+        numb_keys <span class="op">=</span> <span class="bu">len</span>(W.keys())
+        cut <span class="op">=</span> {}
+
+        <span class="co">### Define cuts</span>
+        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(numb_keys):
+            length_genome <span class="op">=</span> W[<span class="bu">str</span>(i)].shape[<span class="dv">1</span>]
+            cut_not_cut <span class="op">=</span> np.random.uniform(size <span class="op">=</span> <span class="bu">int</span>(pop_size<span class="op">/</span><span class="dv">2</span>)) 
+            cut_not_cut <span class="op">=</span> cut_not_cut <span class="op">&lt;</span> p_c
+            cut[<span class="bu">str</span>(i)] <span class="op">=</span> cut_not_cut <span class="op">*</span> np.random.choice(length_genome, <span class="bu">int</span>(pop_size <span class="op">/</span> <span class="dv">2</span>)) 
+
+        <span class="co">## Perform crossover</span>
+        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(numb_keys):
+            W_now <span class="op">=</span> W[<span class="bu">str</span>(i)]
+            <span class="cf">for</span> cut_now <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">int</span>(pop_size <span class="op">/</span> <span class="dv">2</span>)):
+                aux <span class="op">=</span> np.copy(W_now[<span class="dv">2</span> <span class="op">*</span> cut_now, :])
+                W_now[<span class="dv">2</span> <span class="op">*</span> cut_now,cut[<span class="bu">str</span>(i)][cut_now]:] <span class="op">=</span> W_now[<span class="dv">2</span> <span class="op">*</span> cut_now <span class="op">+</span> <span class="dv">1</span>, cut[<span class="bu">str</span>(i)][cut_now]:]
+                W_now[<span class="dv">2</span> <span class="op">*</span> cut_now <span class="op">+</span> <span class="dv">1</span>,cut[<span class="bu">str</span>(i)][cut_now]:] <span class="op">=</span> aux[cut[<span class="bu">str</span>(i)][cut_now]:]
+                <span class="co">### This is a shallow copy. It will change the dictionary W</span>
+    
+    <span class="kw">def</span> mutate_genome(<span class="va">self</span>, genome, p_m):
+        <span class="co">&quot;&quot;&quot;</span>
+<span class="co">        Mutate genome, each entry changing - by a gaussian noise - with probability p_m.</span>
+<span class="co">        </span>
+<span class="co">        Arguments:</span>
+<span class="co">        ----------</span>
+<span class="co">        genome : dictionary, contains the genomes of the whole population.</span>
+<span class="co">        p_c : probability of crossover.</span>
+<span class="co">        &quot;&quot;&quot;</span>
+
+        pop_size <span class="op">=</span> genome[<span class="st">&quot;0&quot;</span>].shape[<span class="dv">0</span>]
+        numb_keys <span class="op">=</span> <span class="bu">len</span>(W.keys())
+
+        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(numb_keys):
+            genome_now <span class="op">=</span> genome[<span class="bu">str</span>(i)]
+
+            add_mutation <span class="op">=</span> np.random.uniform(size <span class="op">=</span> [pop_size,genome_now.shape[<span class="dv">1</span>]]) <span class="op">&lt;</span> p_m
+            add_mutation <span class="op">=</span> add_mutation <span class="op">*</span> np.random.randn(pop_size,genome_now.shape[<span class="dv">1</span>]) 
+
+            genome_now <span class="op">+=</span> add_mutation</code></pre></div>
+<div id="propagate-the-model" class="section level2">
+<h2><span class="header-section-number">2.1</span> Propagate the model</h2>
+<p>I wrote a tensorflow implementation of the model below, using <a href="https://www.tensorflow.org/api_docs/python/tf/nn/sigmoid_cross_entropy_with_logits">sigmoid_cross_entropy_with_logits</a>. Since we now know how to feed the weights to a keras model we shall stick with the latter approach.</p>
+<p>The code will not be efficient because it is not vectorized (on population). Apparently there is a nicer way to implement using keras. Keras was mainly designed for CNN's, therefore it has many nice 3D matrices computations (like multiplications, convolutions and so) already implemented.</p>
+<p><a href="https://www.tensorflow.org/api_docs/python/tf/keras/backend/dot" class="uri">https://www.tensorflow.org/api_docs/python/tf/keras/backend/dot</a></p>
+<p>For this example this is not a big deal. In real application, this can be important.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> GA_Model:
+    
+    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):
+        <span class="cf">pass</span>
+    
+    <span class="kw">def</span> forward_using_keras(<span class="va">self</span>, model, X, Y, W, b, j):
+        <span class="co">&quot;&quot;&quot;</span>
+<span class="co">        Forward propagate the jth individual ANN</span>
+<span class="co">        with input X, label Y, weights W and b  of the whole population in a given list, </span>
+<span class="co">        where ith entry of the latter corresponds to </span>
+<span class="co">        the ith layer (see discussion above).</span>
+<span class="co">        </span>
+<span class="co">        Arguments:</span>
+<span class="co">        ----------        </span>
+<span class="co">        model: keras model</span>
+<span class="co">        X : features, as batch_size X features.</span>
+<span class="co">        Y : labels, as batch_size X {0,1}.</span>
+<span class="co">        W : dictionary, with W weights (see Equation 3).</span>
+<span class="co">        b : dictionary, with b weights (see Equation 3).</span>
+<span class="co">        j : integer, individual number.</span>
+<span class="co">        &quot;&quot;&quot;</span>
+        N_layers <span class="op">=</span> <span class="bu">len</span>(W.keys())
+
+        new_weights <span class="op">=</span> [ ]
+        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(N_layers):
+            <span class="co"># Recall that W has to be transposed in keras</span>
+            new_weights.append(np.transpose(W[<span class="bu">str</span>(i)][:,:,j])) 
+            new_weights.append(np.transpose(b[<span class="bu">str</span>(i)][:,:,j]).reshape(<span class="op">-</span><span class="dv">1</span>))
+        
+        model.set_weights(new_weights)
+        loss, accuracy <span class="op">=</span> model.evaluate(X, Y, verbose <span class="op">=</span> <span class="va">False</span>)
+        
+        <span class="cf">return</span> loss, accuracy
+        
+    <span class="kw">def</span> fwd_propagate_population_keras(<span class="va">self</span>,model, X, Y, W, b):
+        <span class="co">&quot;&quot;&quot;</span>
+<span class="co">        Forward propagate the whole population genome as ANNs,</span>
+<span class="co">        with input X, label Y, weights W and b  of the whole population in a given list, </span>
+<span class="co">        where ith entry of the latter corresponds to </span>
+<span class="co">        the ith layer (see discussion above).</span>
+<span class="co">        </span>
+<span class="co">        Arguments:</span>
+<span class="co">        ----------        </span>
+<span class="co">        model: keras model</span>
+<span class="co">        X : features, as batch_size X features.</span>
+<span class="co">        Y : labels, as batch_size X {0,1}.</span>
+<span class="co">        W : dictionary, with W weights (see Equation 3).</span>
+<span class="co">        b : dictionary, with b weights (see Equation 3).</span>
+<span class="co">        &quot;&quot;&quot;</span>
+        N_layers <span class="op">=</span> <span class="bu">len</span>(W.keys())<span class="op">+</span><span class="dv">1</span>
+        pop_size <span class="op">=</span> W[<span class="st">&quot;0&quot;</span>].shape[<span class="op">-</span><span class="dv">1</span>]
+        cost <span class="op">=</span> [ ]
+        predict <span class="op">=</span> [ ]
+        <span class="cf">for</span> gen_now <span class="kw">in</span> <span class="bu">range</span>(pop_size):             
+            cost_now , pred_now <span class="op">=</span> <span class="va">self</span>.forward_using_keras(model, X, Y, W, b, gen_now)
+            cost.append(cost_now)
+            predict.append(pred_now)
+
+        <span class="va">self</span>.cost <span class="op">=</span> cost
+        <span class="va">self</span>.predict  <span class="op">=</span> predict
+    
+    <span class="kw">def</span> genome_score(<span class="va">self</span>, cost,  genome_W, genome_b, beta <span class="op">=</span> <span class="dv">10</span>):
+        <span class="co">&quot;&quot;&quot;</span>
+<span class="co">        Return a new population of genomes, selected randomly according to the partition function </span>
+<span class="co">        (see Equation 3).</span>
+<span class="co">        </span>
+<span class="co">        Arguments:</span>
+<span class="co">        ----------</span>
+<span class="co">        genome_W : dictionary, where the  component W of each layer is written as a genome (see Equation 3).</span>
+<span class="co">        genome_b : dictionary, where the  component b of each layer is written as a genome (see Equation 3).</span>
+<span class="co">        beta : parameters used for the partition function (see Equation 3).</span>
+<span class="co">        cost : accuracy associated to an ANN with corresponding weights (given by genome_{W,b});</span>
+<span class="co">               used as parameter in the partition function (see Equation 3).</span>
+<span class="co">        &quot;&quot;&quot;</span>
+        pop_size <span class="op">=</span> genome_W[<span class="st">&quot;0&quot;</span>].shape[<span class="dv">0</span>]
+        
+        costs <span class="op">=</span> <span class="va">self</span>.cost
+        p_c <span class="op">=</span> beta_softmax(beta, costs)
+        selected <span class="op">=</span> np.random.choice(pop_size,pop_size, p <span class="op">=</span> p_c)
+        N_layers <span class="op">=</span> <span class="bu">len</span>(W.keys())
+        
+        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(N_layers):
+            genome_W[<span class="bu">str</span>(i)] <span class="op">=</span> genome_W[<span class="bu">str</span>(i)][selected,:]
+            genome_b[<span class="bu">str</span>(i)] <span class="op">=</span> genome_b[<span class="bu">str</span>(i)][selected,:]
+        
+        <span class="cf">return</span> genome_W, genome_b        
+        
+<span class="kw">def</span> beta_softmax(beta, Z):
+    <span class="co">&quot;&quot;&quot;</span>
+<span class="co">    Return a selection of genomes by order of preference</span>
+
+<span class="co">    Arguments:</span>
+<span class="co">    ----------</span>
+<span class="co">    beta : parameters used for the partition function</span>
+<span class="co">    </span>
+<span class="co">    &quot;&quot;&quot;</span>
+    a <span class="op">=</span>  tf.nn.softmax(logits <span class="op">=</span> <span class="op">-</span>beta <span class="op">*</span> tf.constant(Z))
+    <span class="cf">return</span> a.numpy()</code></pre></div>
+</div>
+<div id="implementation" class="section level2">
+<h2><span class="header-section-number">2.2</span> Implementation</h2>
+<p>First we set up the parameters:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">N_generations <span class="op">=</span> <span class="dv">200</span>
+pop_size <span class="op">=</span> <span class="dv">100</span>
+
+layer_sizes <span class="op">=</span> [<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">1</span>]
+
+ga_model <span class="op">=</span> GA_Model()
+genome_and_weights <span class="op">=</span> Genomes_and_weights()
+
+p_m <span class="op">=</span> <span class="fl">0.005</span>  <span class="co"># probability of mutation</span>
+p_c <span class="op">=</span> <span class="fl">0.8</span>   <span class="co"># probability of crossover</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">Save_results <span class="op">=</span> { }
+
+<span class="cf">for</span> test <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">20</span>):
+    accuracy_train <span class="op">=</span> [ ]
+    accuracy_test <span class="op">=</span> [ ]
+    W, b <span class="op">=</span> genome_and_weights.initialize_weights(layer_sizes,pop_size)
+    <span class="bu">print</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st"> Test number </span><span class="ch">\t</span><span class="st">&quot;</span>, test)
+    
+    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(N_generations):
+        cost <span class="op">=</span> ga_model.fwd_propagate_population_keras(model, X_train, Y_train, W, b)
+
+        genome_W, genome_b <span class="op">=</span> genome_and_weights.weights_to_genome(W, b)
+        genome_W, genome_b <span class="op">=</span> ga_model.genome_score(cost, genome_W, genome_b)
+        <span class="co"># crossover</span>
+        genome_and_weights.crossover(genome_W, p_c)
+        genome_and_weights.crossover(genome_b, p_c)
+        <span class="co"># mutation</span>
+        genome_and_weights.mutate_genome(genome_W, p_m)
+        genome_and_weights.mutate_genome(genome_b, p_m)
+
+        W, b <span class="op">=</span> genome_and_weights.genome_to_weights(genome_W, genome_b,layer_sizes)
+
+        <span class="co">## Get accuracy</span>
+        all_costs <span class="op">=</span> np.array(ga_model.cost, ndmin <span class="op">=</span> <span class="dv">1</span>)
+        m <span class="op">=</span> np.<span class="bu">min</span>(np.squeeze(np.asarray(np.where(all_costs <span class="op">==</span> np.<span class="bu">min</span>(all_costs)))))
+        <span class="co"># Training set    </span>
+        _, predict_train <span class="op">=</span> ga_model.forward_using_keras(model, X_train, Y_train, W, b, m)
+        accuracy_train.append(predict_train)
+        <span class="co"># Test set</span>
+        _, predict_test <span class="op">=</span> ga_model.forward_using_keras(model, X_test, Y_test, W, b, m)
+        accuracy_test.append(predict_test)
+        
+    Save_results[<span class="bu">str</span>(test)] <span class="op">=</span> [accuracy_test,accuracy_train]</code></pre></div>
+<p>Now let's plot some graphs. I'll need some extra libraries for that</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">## To zoom in part of the graph we will use these libraries</span>
+<span class="im">from</span> mpl_toolkits.axes_grid1.inset_locator <span class="im">import</span> zoomed_inset_axes
+<span class="im">from</span> mpl_toolkits.axes_grid1.inset_locator <span class="im">import</span> mark_inset
+
+<span class="co"># To customize legend</span>
+<span class="im">from</span> matplotlib.lines <span class="im">import</span> Line2D</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">number_runs <span class="op">=</span> <span class="dv">20</span>
+Accuracy_test <span class="op">=</span> np.zeros([number_runs, N_generations])
+Accuracy_train <span class="op">=</span> np.zeros([number_runs, N_generations])
+
+<span class="cf">for</span> test <span class="kw">in</span> <span class="bu">range</span>(number_runs):
+    Accuracy_test[test,:] <span class="op">=</span>  Save_results[<span class="bu">str</span>(test)][<span class="dv">0</span>]
+    Accuracy_train[test,:] <span class="op">=</span>  Save_results[<span class="bu">str</span>(test)][<span class="dv">1</span>]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">av_test <span class="op">=</span> np.average(Accuracy_test,axis<span class="op">=</span><span class="dv">0</span>)
+std_test <span class="op">=</span> np.std(Accuracy_test,axis<span class="op">=</span><span class="dv">0</span>)
+
+av_train <span class="op">=</span> np.average(Accuracy_train,axis<span class="op">=</span><span class="dv">0</span>)
+std_train <span class="op">=</span> np.std(Accuracy_train,axis<span class="op">=</span><span class="dv">0</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">f, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">15</span>,<span class="dv">10</span>))
+axins <span class="op">=</span> plt.axes([<span class="fl">0.4</span>, <span class="fl">0.16</span>, <span class="fl">0.5</span>,<span class="fl">0.5</span>])
+
+cmap_test<span class="op">=</span>plt.cm.Blues(np.linspace(<span class="dv">0</span>,<span class="dv">1</span>,number_runs))
+cmap_train<span class="op">=</span>plt.cm.Reds(np.linspace(<span class="dv">0</span>,<span class="dv">1</span>,number_runs))
+
+L <span class="op">=</span> <span class="dv">50</span>
+
+<span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(number_runs):
+    ax.plot(Accuracy_train[i,<span class="dv">0</span>:],lw <span class="op">=</span> <span class="dv">2</span>,linestyle<span class="op">=</span>(<span class="dv">0</span>,(<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>)), alpha <span class="op">=</span> .<span class="dv">8</span>, color<span class="op">=</span>cmap_train[i])
+    ax.plot(Accuracy_test[i,<span class="dv">0</span>:],lw <span class="op">=</span> <span class="dv">2</span>,linestyle<span class="op">=</span><span class="st">&#39;-&#39;</span>, alpha <span class="op">=</span> .<span class="dv">8</span>,color<span class="op">=</span>cmap_test[i])
+    
+    <span class="cf">if</span> i<span class="op">==</span><span class="dv">13</span>:
+        axins.set_title(<span class="st">&quot;A closer view of population &quot;</span><span class="op">+</span><span class="bu">str</span>(i))
+        axins.plot(
+            np.arange(N_generations)[L:],Accuracy_train[i,L:],<span class="op">\</span>
+            lw <span class="op">=</span> <span class="dv">2</span>,linestyle<span class="op">=</span>(<span class="dv">0</span>,(<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>)), alpha <span class="op">=</span> .<span class="dv">8</span>,color<span class="op">=</span>cmap_train[i]
+        )
+        axins.plot(
+            np.arange(N_generations)[L:],Accuracy_test[i,L:],<span class="op">\</span>
+            lw <span class="op">=</span> <span class="dv">2</span>,linestyle<span class="op">=</span>(<span class="dv">0</span>,(<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>)), alpha <span class="op">=</span> .<span class="dv">8</span>,color<span class="op">=</span>cmap_test[i]
+        )
+
+        axins.set_ylim(<span class="fl">0.83</span>,.<span class="dv">903</span>)
+
+ax.set_title(
+    <span class="st">&quot;Best accuracy train: &quot;</span><span class="op">+</span><span class="bu">str</span>(np.<span class="bu">round</span>(np.<span class="bu">max</span>(Accuracy_train),<span class="dv">4</span>))<span class="op">+</span><span class="st">&quot;,\</span>
+<span class="st">    Best accuracy test: &quot;</span><span class="op">+</span><span class="bu">str</span>(np.<span class="bu">round</span>(np.<span class="bu">max</span>(Accuracy_test),<span class="dv">4</span>))
+)
+
+ax.set_xlabel(<span class="st">&quot;Generation&quot;</span>)
+ax.set_ylabel(<span class="st">&quot;Accuracy&quot;</span>)
+
+<span class="co">## Custom legend</span>
+legend_elements <span class="op">=</span> [Line2D([<span class="dv">0</span>], [<span class="dv">0</span>], color <span class="op">=</span> cmap_train[<span class="dv">15</span>], lw<span class="op">=</span><span class="dv">4</span>, label<span class="op">=</span><span class="st">&#39;GA - training&#39;</span>),
+                   Line2D([<span class="dv">0</span>], [<span class="dv">0</span>], color <span class="op">=</span> cmap_test[<span class="dv">15</span>], lw<span class="op">=</span><span class="dv">4</span>, label<span class="op">=</span><span class="st">&#39;GA - testing&#39;</span>)]
+ax.legend(handles <span class="op">=</span> legend_elements,fontsize<span class="op">=</span> <span class="dv">18</span>, loc <span class="op">=</span> <span class="dv">3</span>)
+
+ax.grid(<span class="va">True</span>)
+plt.show()</code></pre></div>
+<p><img src="output_64_0.png" alt="png," style="zoom:150%;" /></p>
+<p>It is somehow better to see the average and standard deviation of these runs. One caveat that you should be aware of is that averaging removes a lot of the oscillation you see in each realization of this process; the standard deviation (represented as a shadow) helps a little, keeping part of this information in the plot.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">f, ax <span class="op">=</span> plt.subplots(figsize <span class="op">=</span> (<span class="dv">15</span>,<span class="dv">8</span>))
+ax.plot(
+    av_train, color <span class="op">=</span> cmap_train[<span class="dv">15</span>], label <span class="op">=</span> <span class="st">&#39;GA - train&#39;</span>
+)
+ax.plot(
+    av_test, color <span class="op">=</span> cmap_test[<span class="dv">15</span>], label <span class="op">=</span> <span class="st">&#39;GA - test&#39;</span>
+)
+ax.set_title(
+    <span class="st">&quot;Best accuracy train: &quot;</span><span class="op">+</span><span class="bu">str</span>(np.<span class="bu">round</span>(np.<span class="bu">max</span>(Accuracy_train),<span class="dv">4</span>))<span class="op">+</span><span class="st">&quot;,\</span>
+<span class="st">    Best accuracy test: &quot;</span><span class="op">+</span><span class="bu">str</span>(np.<span class="bu">round</span>(np.<span class="bu">max</span>(Accuracy_test),<span class="dv">4</span>))
+)
+x_domain_plot <span class="op">=</span> np.arange(<span class="bu">len</span>(av_train<span class="op">-</span>std_train))
+
+<span class="co"># Shaded part with st deviation information</span>
+ax.fill_between(
+    x_domain_plot, av_train <span class="op">-</span> std_train, av_train <span class="op">+</span> std_train,color <span class="op">=</span> cmap_train[<span class="dv">15</span>], alpha <span class="op">=</span>.<span class="dv">1</span>
+)
+ax.fill_between(
+    x_domain_plot, av_test <span class="op">-</span> std_test, av_test <span class="op">+</span> std_test, color <span class="op">=</span> cmap_test[<span class="dv">15</span>], alpha <span class="op">=</span>.<span class="dv">1</span>
+)
+ax.set_xlabel(<span class="st">&quot;Generation&quot;</span>)
+ax.set_ylabel(<span class="st">&quot;Accuracy&quot;</span>)
+ax.legend(fontsize <span class="op">=</span> <span class="dv">18</span>, loc <span class="op">=</span> <span class="dv">4</span>)
+ax.grid(<span class="va">True</span>)
+plt.show()</code></pre></div>
+<p><img src="output_66_0.png" alt="png," style="zoom:150%;" /></p>
+<p>In summary, we can get results that are even better than those using the &quot;classical&quot; backpropagation approach. Notice that this is heavily dependant on the fact that the problem is not that high dimensional, i.e., not many parameters to tubne by optimization. For high dimensional problems a hybrid approach is probably more apropriate.</p>
+</div>
+<div id="final-remarks-can-we-improve-these-results" class="section level2">
+<h2><span class="header-section-number">2.3</span> Final remarks: can we improve these results?</h2>
+<p>Surely we can! I will leave some ideas below, you can try to find others. I also strongly recommend Hillis' paper: it is full of nice ideas.</p>
+<blockquote>
+<ol style="list-style-type: decimal">
+<li><strong>Varying <span class="math inline">\(\beta\)</span>:</strong> in the function &quot;beta_softmax&quot; there is a parameter beta. It plays the role of the Boltzmann constant (that's what inspired me, actually), which is proportional to 1/T, where T is the temperature. The idea could be to take <span class="math inline">\(T \downarrow 0\)</span>, in what is known as quenching. In each epoch we could lower T a little (hence making <span class="math inline">\(\beta\)</span> a bit larger). Physically, doing it too fast is known as quenching, whereas doing it slowly is known as anneling. Some people call it &quot;tempering&quot;. As an optimization technique, this idea became widespread after an interesting paper by Fitzpatrick and others in the 80s.</li>
+<li><strong>Desing different crossovers:</strong> I only did one type, where we choose a point in the genome and cut. But why not crossing over in many different points? That would be possible too</li>
+<li><strong>Diminishing the mutation probability and crossover probability through time</strong>: this is similar to the idea 1.</li>
+</ol>
+</blockquote>
+<p>The range of possibilities is enormous. If you are really interested you should take a look at Hillis' paper and at the MIT OCW reference.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["ga_bookdown.pdf", "ga_bookdown.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

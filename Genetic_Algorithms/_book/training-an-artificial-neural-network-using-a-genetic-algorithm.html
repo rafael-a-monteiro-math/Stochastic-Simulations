@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 Training an Artificial Neural Network using a genetic algorithm | A Minimal Book Example</title>
+  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 Training an Artificial Neural Network using a genetic algorithm | A Minimal Book Example" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 Training an Artificial Neural Network using a genetic algorithm | A Minimal Book Example" />
+  
+  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+<meta name="author" content="Yihui Xie" />
+
+
+<meta name="date" content="2020-07-09" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="implementating-the-ga-recipe.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Prerequisites</a></li>
+<li class="chapter" data-level="2" data-path="training-an-artificial-neural-network-using-a-genetic-algorithm.html"><a href="training-an-artificial-neural-network-using-a-genetic-algorithm.html"><i class="fa fa-check"></i><b>2</b> Training an Artificial Neural Network using a genetic algorithm</a><ul>
+<li class="chapter" data-level="2.1" data-path="training-an-artificial-neural-network-using-a-genetic-algorithm.html"><a href="training-an-artificial-neural-network-using-a-genetic-algorithm.html#the-classical-approach-using-anns"><i class="fa fa-check"></i><b>2.1</b> The classical approach using ANNs</a></li>
+<li class="chapter" data-level="2.2" data-path="training-an-artificial-neural-network-using-a-genetic-algorithm.html"><a href="training-an-artificial-neural-network-using-a-genetic-algorithm.html#genetic-algorithms"><i class="fa fa-check"></i><b>2.2</b> Genetic Algorithms</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="training-an-artificial-neural-network-using-a-genetic-algorithm.html"><a href="training-an-artificial-neural-network-using-a-genetic-algorithm.html#how-does-it-work"><i class="fa fa-check"></i><b>2.2.1</b> How does it work?</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="training-an-artificial-neural-network-using-a-genetic-algorithm.html"><a href="training-an-artificial-neural-network-using-a-genetic-algorithm.html#adding-a-little-bit-of-mathematics-to-the-discussion"><i class="fa fa-check"></i><b>2.3</b> Adding a little bit of mathematics to the discussion</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="implementating-the-ga-recipe.html"><a href="implementating-the-ga-recipe.html"><i class="fa fa-check"></i><b>3</b> Implementating the GA &quot;recipe&quot;</a><ul>
+<li class="chapter" data-level="3.1" data-path="implementating-the-ga-recipe.html"><a href="implementating-the-ga-recipe.html#propagate-the-model"><i class="fa fa-check"></i><b>3.1</b> Propagate the model</a></li>
+<li class="chapter" data-level="3.2" data-path="implementating-the-ga-recipe.html"><a href="implementating-the-ga-recipe.html#implementation"><i class="fa fa-check"></i><b>3.2</b> Implementation</a></li>
+<li class="chapter" data-level="3.3" data-path="implementating-the-ga-recipe.html"><a href="implementating-the-ga-recipe.html#final-remarks-can-we-improve-these-results"><i class="fa fa-check"></i><b>3.3</b> Final remarks: can we improve these results?</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>4</b> Introduction</a></li>
+<li class="chapter" data-level="5" data-path="literature.html"><a href="literature.html"><i class="fa fa-check"></i><b>5</b> Literature</a></li>
+<li class="chapter" data-level="6" data-path="methods.html"><a href="methods.html"><i class="fa fa-check"></i><b>6</b> Methods</a></li>
+<li class="chapter" data-level="7" data-path="applications.html"><a href="applications.html"><i class="fa fa-check"></i><b>7</b> Applications</a><ul>
+<li class="chapter" data-level="7.1" data-path="applications.html"><a href="applications.html#example-one"><i class="fa fa-check"></i><b>7.1</b> Example one</a></li>
+<li class="chapter" data-level="7.2" data-path="applications.html"><a href="applications.html#example-two"><i class="fa fa-check"></i><b>7.2</b> Example two</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="final-words.html"><a href="final-words.html"><i class="fa fa-check"></i><b>8</b> Final Words</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Minimal Book Example</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="training-an-artificial-neural-network-using-a-genetic-algorithm" class="section level1">
+<h1><span class="header-section-number">Chapter 2</span> Training an Artificial Neural Network using a genetic algorithm</h1>
+<center>
+<b>Rafael Monteiro</b> <br>Mathematics for Advanced Materials - Open Innovation Lab (MathAM-OIL)/Tohoku University, Sendai, Japan <br> rafael.a.monteiro.math &quot;at&quot; gmail.com <br><br> <b>July 9, 2020</b> <br><br>
+</center>
+<p>In the literature of Artificial Neural Networks (ANNs), the most common form of training involves the using <a href="https://en.wikipedia.org/wiki/Gradient_descent">Gradient Descent</a> (GD) using the <a href="https://en.wikipedia.org/wiki/Backpropagation">Backpropagation Algorithm</a> (BP), which is nothing but the algorithmic design of gradient computations in a neat form (which shoud not be overlooked, for it was a huge step forwards in the field of Machine Learning).</p>
+<p>It turns out that BP relies on computations of derivatives. The natural question is then: can we train an ANN without gradient information?</p>
+<p>Yes, we can: we just need to figure out how to explore the parameters' search space. I coded an example (available <a href="https://rafael-a-monteiro-math.github.io/Stochastic-Simulations/index.html">here</a> in which we perform training of an ANN using a very simple (somewhat primitive) random search. In fact, if one thinks about GD methods, or any other optimization methods, they are nothing but ways to explore the parameter space.</p>
+<p>What I will do in the sequel is mainly based inspired by Daniel Hillis seminal paper <a href="https://www.sciencedirect.com/science/article/abs/pii/0167278990900762">Co-evolving parasites improve simulated evolution as an optimization procedure</a>, that I really liked (and strongly recommend). The technique has many names, and is commonly known as <strong>Genetic Algorithms</strong>. There are many books available, and if you are interested you can start by looking here at this MIT OCW course - <a href="https://ocw.mit.edu/courses/institute-for-data-systems-and-society/ids-338j-multidisciplinary-system-design-optimization-spring-2010/">Multidisciplinary System Design Optimization</a>.</p>
+<p>To begin with, let's generate some data, construct a classical ANN (using <a href="https://keras.io/">Keras</a>).</p>
+<blockquote>
+<p><strong>Remark:</strong> take a look at <a href="http://playground.tensorflow.org/" class="uri">http://playground.tensorflow.org/</a>, which is a very interesting site to see how decision boundaries behave as training evolves through time.</p>
+</blockquote>
+<div id="the-classical-approach-using-anns" class="section level2">
+<h2><span class="header-section-number">2.1</span> The classical approach using ANNs</h2>
+<p>To begin with, let's consider a problem, a simple one, not too complicate. Let's get the libraries we shall need.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">#for numerical computations</span>
+<span class="im">import</span> numpy <span class="im">as</span> np           
+
+<span class="co">#for plotting</span>
+<span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt   
+plt.style.use(<span class="st">&#39;ggplot&#39;</span>)  <span class="co"># check plt.style.available</span>
+
+<span class="co">#for training classical ANN; we shall also borrow some activation functions from them</span>
+<span class="im">import</span> tensorflow <span class="im">as</span> tf
+
+<span class="co">#to generate the dataset</span>
+<span class="im">from</span> sklearn.datasets <span class="im">import</span> make_moons
+
+<span class="co"># for train-test splitting</span>
+<span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split
+
+<span class="co">## extra</span>
+<span class="im">from</span> copy <span class="im">import</span> deepcopy</code></pre></div>
+<p>First we get the dataset</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">X, Y  <span class="op">=</span> make_moons(noise <span class="op">=</span> .<span class="dv">2</span>, n_samples <span class="op">=</span> <span class="dv">400</span>)
+
+color <span class="op">=</span> np.asarray([<span class="st">&#39;purple&#39;</span>, <span class="st">&#39;green&#39;</span>])</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">f, ax <span class="op">=</span> plt.subplots(figsize <span class="op">=</span> (<span class="dv">15</span>,<span class="dv">6</span>))
+ax.scatter(X[:,<span class="dv">0</span>], X[:,<span class="dv">1</span>], c <span class="op">=</span> color[Y])
+ax.set_xlabel(<span class="st">&quot;X&quot;</span>)
+ax.set_ylabel(<span class="st">&quot;Y&quot;</span>)
+ax.grid(<span class="va">True</span>)</code></pre></div>
+<p><img src="output_5_0.png" alt="png," style="zoom:150%;" /></p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">X_train, X_test, Y_train, Y_test <span class="op">=</span> train_test_split(X, Y, test_size <span class="op">=</span> .<span class="dv">2</span>)
+Y_train, Y_test <span class="op">=</span>  np.reshape(Y_train, (<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)), np.reshape(Y_test, (<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>))</code></pre></div>
+<p>Recall that keras considers the data as batch_size X features</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> keras
+<span class="im">from</span> keras.models <span class="im">import</span> Sequential
+<span class="im">from</span> keras.layers <span class="im">import</span> Dense
+
+keras.backend.clear_session() 
+<span class="co"># Neural network</span>
+model <span class="op">=</span> Sequential()
+model.add(Dense(<span class="dv">4</span>, input_dim<span class="op">=</span><span class="dv">2</span>, activation<span class="op">=</span><span class="st">&#39;relu&#39;</span>))
+model.add(Dense(<span class="dv">1</span>, activation<span class="op">=</span><span class="st">&#39;sigmoid&#39;</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">model.<span class="bu">compile</span>(loss <span class="op">=</span> <span class="st">&#39;binary_crossentropy&#39;</span>, optimizer <span class="op">=</span> <span class="st">&#39;adam&#39;</span>, metrics <span class="op">=</span> [<span class="st">&#39;accuracy&#39;</span>])</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">history <span class="op">=</span> deepcopy(model.fit(X_train, Y_train, epochs <span class="op">=</span> <span class="dv">200</span>, batch_size <span class="op">=</span> <span class="va">None</span>, verbose <span class="op">=</span> <span class="va">False</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># fit the keras model on the dataset</span>
+_, accuracy_test <span class="op">=</span> model.evaluate(X_test, Y_test)
+_, accuracy_train <span class="op">=</span> model.evaluate(X_train, Y_train)</code></pre></div>
+<pre><code>80/80 [==============================] - 0s 319us/step
+320/320 [==============================] - 0s 32us/step</code></pre>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">print</span>(
+    <span class="st">&quot;</span><span class="ch">\n</span><span class="st"> The accuracty for the testing set is &quot;</span><span class="op">+</span><span class="bu">str</span>(np.<span class="bu">round</span>(accuracy_test, <span class="dv">4</span>))<span class="op">+\</span>
+    <span class="st">&quot;</span><span class="ch">\n</span><span class="st"> The accuracty for the training set is &quot;</span><span class="op">+</span><span class="bu">str</span>(np.<span class="bu">round</span>(accuracy_train, <span class="dv">4</span>))
+)</code></pre></div>
+<pre><code> The accuracty for the testing set is 0.9125
+ The accuracty for the training set is 0.8781</code></pre>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">#model.evaluate(X,Y)</span>
+f, ax <span class="op">=</span> plt.subplots(ncols <span class="op">=</span> <span class="dv">2</span>, figsize <span class="op">=</span> (<span class="dv">15</span>,<span class="dv">6</span>))
+
+ax[<span class="dv">0</span>].set_title(<span class="st">&quot;Accuracy&quot;</span>)
+ax[<span class="dv">0</span>].set_xlabel(<span class="st">&#39;Epochs&#39;</span>)
+ax[<span class="dv">0</span>].plot(history.history[<span class="st">&#39;accuracy&#39;</span>], c <span class="op">=</span> <span class="st">&#39;r&#39;</span>)
+
+ax[<span class="dv">1</span>].set_title(<span class="st">&quot;Cost&quot;</span>)
+ax[<span class="dv">1</span>].set_xlabel(<span class="st">&#39;Epochs&#39;</span>)
+ax[<span class="dv">1</span>].plot(history.history[<span class="st">&#39;loss&#39;</span>], c <span class="op">=</span> <span class="st">&#39;b&#39;</span>)</code></pre></div>
+<p><img src="output_13_1.png" alt="png," style="zoom:150%;" /></p>
+</div>
+<div id="genetic-algorithms" class="section level2">
+<h2><span class="header-section-number">2.2</span> Genetic Algorithms</h2>
+<p>Genetic Algorithms (GA) are somehow inspired by biological plenomena. I will not dwell on the topic that much, just referring briefly to the properties you should know of:</p>
+<blockquote>
+<p>it is a sequence of nucleotidis, which as smaller units they are made of. You can imagine it as a vector, where each entry of the vector is a nucleotidis. In general the number of nucleotides is finite, but here we shall allow them to assume any value in the real line. <br><br> <a href="https://en.wikipedia.org/wiki/Mutation">Mutation:</a> it consists of a random change that may happen to any entry in a genome. <br> <a href="https://en.wikipedia.org/wiki/Chromosomal_crossover">Crossover:</a> it is basically a process in which a pair of genomes exchange nucleotides. In our case we will do it by defining a cutting point. For instance: given two sequences,<span class="math display">\[X_1 \quad \text{and}\quad X_2,\]</span> if the cutting point is &quot;c&quot; (we shall use python's slicing convention), these two sequences will recombine into two new sequences, <span class="math display">\[ {\label{combination}
+\begin{align}
+\widetilde{X}_{j(mod2)} := X_{j(mod2)}[0:c]\oplus X_{(j+1)(mod2)}[c:],\quad \text{for} \quad  j\in\{0,1\}. \tag{1}\end{align}
+\]</span></p>
+<p>For example. when <span class="math inline">\(c=2\)</span>, $ X_1= (1,9,8,7)$, and <span class="math inline">\(X_2 = (2,0,2,0)\)</span> we get <span class="math inline">\(\widetilde{X_2} = (1,9,2,0)\)</span> and <span class="math inline">\(\widetilde{X}_2 = (2,0,8,7)\)</span>. Needless to say that these two sequences should always have the same length.</p>
+</blockquote>
+<p>There are other types of crossover, and I'll stick with the one explained above. You can read more about Biology at the <a href="https://www.britannica.com/science/human-genetics/Immunogenetics">Encyclopedia Britannica</a> website.</p>
+<p>As you might have noticed, since mutation and crossover are stochastic, we shall need to define two associated quantities, respectively <span class="math inline">\(p_m\)</span> and <span class="math inline">\(p_c\)</span>, to account for them.</p>
+<div id="how-does-it-work" class="section level3">
+<h3><span class="header-section-number">2.2.1</span> How does it work?</h3>
+<p>First, we shall need an &quot;interface&quot; between weights of an ANN, and genomes: we shall be able to map one to the other in a 1-1 way. This part is easy, and will be tackled soon.</p>
+<p>There are other things more important to worry about.</p>
+<p><strong>Genomes?</strong></p>
+<p>This part is somewhat nontrivial, involving a bit of modeling and, mostly, critical thinking: where are the genomes in an ANN? The first thing to do is to think what we are looking at: when we optimize an ANN we are after some &quot;good&quot; weights, based on which the model has good accuracy, or scores well in a certain metric. In our case then, we shall look at weights as if they were genomes. In order to do that we shall first &quot;flatten&quot; all the layers together, as if they were a long genome.</p>
+<p><strong>Fitness</strong></p>
+<p>Next, we think about how to measure the fitness of a genome: what makes a sequence better than other? This part is not much far from the classical ANN model, and we shall consider the weights that give a high accuracy of prediction. In a serious project or paper, you should split the dataset into 3 parts, train-dev-test set, but here we shall only use a train-test, and do model assessment by measuring the error on the training set, and testing it on the test set.</p>
+<p>We are looking for some quantity that indicates how well the indiviual &quot;survives&quot; in a certain environment: that is, given an ANN with a certain genome, if it classifies well, all is good and we would like more of that genome in our future propulations (which means, this individual should leave descendants), but if it does not classify well, this ANN will probably not succeed, and shall not leave descendants.</p>
+<p>We shall then measure fitness as a function inversely proportional to the cost function (which in the classical ANN setting must be minimized): the higher (resp. lower) the cost, the less (resp. more) prone to leave decendants the individual is.</p>
+</div>
+</div>
+<div id="adding-a-little-bit-of-mathematics-to-the-discussion" class="section level2">
+<h2><span class="header-section-number">2.3</span> Adding a little bit of mathematics to the discussion</h2>
+<p>Mathematically, we we will do the following: assuming a population (a set of ANNs' weights) <span class="math inline">\(\mathscr{W}= \left( W_j\right)_{1\leq j \leq N}\)</span>, assume a cost function <span class="math inline">\(\mathscr{W}\ni W \mapsto \mathrm{Cost}_{\mathscr{W}}(W)\)</span>. Now we associate a probability measure to each individual in this population,</p>
+<p><span class="math display">\[
+\begin{align}
+P(W_j) = \frac{ e^{- \beta \mathrm{Cost}_{\mathscr{W}}(W_j)}}{\sum_{m = 1}^N e^{-\beta \mathrm{Cost}_{\mathscr{W}}(W_m)}},\tag{2}
+\end{align}
+\]</span></p>
+<p>which plays the role of a <a href="https://en.wikipedia.org/wiki/Partition_function_(statistical_mechanics)">canonical partition function</a>, as in Statistical Mechanics. The quantity <span class="math inline">\(\beta\)</span> is a quantity that we give, and is inversely proportional to the temperature in the system; I'll talk more about that towards the end. When <span class="math inline">\(\beta =1\)</span> this function becomes the well known <a href="softmax%20function">https://en.wikipedia.org/wiki/Softmax_function</a>.</p>
+<p>We shall use <span class="math inline">\((2)\)</span> as follows: given a population of <span class="math inline">\(N\)</span> individuals, with weights <span class="math inline">\(\mathscr{W}= \left( W_j\right)_{1\leq j \leq N}\)</span>, at each step we shall generate a new population with <span class="math inline">\(N\)</span> individuals by selecting from <span class="math inline">\(\mathscr{W}\)</span> with probabilities given by <span class="math inline">\((2)\)</span>. <strong>Notice that the individual that minimizes the cost function is the one that has the highest probability of being chosen.</strong></p>
+<p>Last, we shall talk about mutations. We shall consider mutations at each entry of the weight matrices, as a Bernoulli with probability <span class="math inline">\(p_c\)</span> (for now kept constant, but which can mutate at each iteration). If an entry is chosen to mutate, it will do so as a random noise, distributed as a normal variable centered at the origin, with variance 1.</p>
+<p>In what follows, I'll assume N even: if it is odd you can &quot;throw away a descendant&quot; at the end of this process.</p>
+<p>Ok, now we are ready to start. We shall define a few things:</p>
+<ol style="list-style-type: decimal">
+<li>Initialize N (random) ANNs randomly, yieding a sequence of ANNs' weights <span class="math inline">\(\mathscr{W} = \left(W_j\right)_{1\leq j \leq N}\)</span>;<br />
+</li>
+<li>Forward propagate each model, generating the fitness P(W_j) of each weight;</li>
+<li>Map each element in $ $ to a space <span class="math inline">\(\mathscr{G}\)</span> of genomes. We shall represent this 1:1 correspondence as <span class="math inline">\(\left(W_j\right)_{1\leq j \leq N} \to \left(G_j\right)_{1\leq j \leq N}\)</span>;</li>
+<li>Select a new generation with N individuals from <span class="math inline">\(\mathscr{G}\)</span>, selected with replacement according to <span class="math inline">\((2)\)</span>. Abusing notation, we shall still represent this generation as <span class="math inline">\(\left(G_j\right)_{1\leq j \leq N}\)</span>;</li>
+<li>For every 1 j N/2, pair individuals <span class="math inline">\(G_{2j}\)</span> and $ G_{2j+1}$ and crossover with probability <span class="math inline">\(p_c\)</span> at a random point along it's length. This new sequence is still denoted by <span class="math inline">\(\left(G_j\right)_{1\leq j \leq N}\)</span>;</li>
+<li>Now, with a sequence <span class="math inline">\(\left(G_j\right)_{1\leq j \leq N}\)</span> in hands, decide whether to mutate each entry by sampling a Bernoulli with parameter <span class="math inline">\(p_c\)</span>: if you get a success (with probability <span class="math inline">\(p_c\)</span>), you mutate the entry by adding noise to it - a realization of a normal distribution with variance 1; if you do not mutate, nothing is done and the entry remains the same.</li>
+<li>Rewrite the genomes as weights: <span class="math inline">\(\left(G_j\right)_{1\leq j \leq N}\to \left(W_j\right)_{1\leq j \leq N}\)</span>;</li>
+<li>Stop, or return to step 3;</li>
+</ol>
+<p>Each time we follow this &quot;recipe&quot; we obtain a new generation (we shall use 150 generations).</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="implementating-the-ga-recipe.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["ga_bookdown.pdf", "ga_bookdown.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
