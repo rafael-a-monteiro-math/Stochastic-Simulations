@@ -44,5 +44,5 @@ Nevertheless, they parallel in the sense that both are stochastic algorithms,  a
 
 
 - [Training an Artificial Neural Network using a Genetic Algorithm](Genetic_Algorithms/ga_ANN.html) ([pdf version](Genetic_Algorithms/ga_ANN.pdf))
-([jupyter-notebook version](Genetic_Algorithms/ga_ANN.ipynb))([markdown-version](Genetic_Algorithms/ga_ANN_markdown.html))
+([jupyter-notebook version](Genetic_Algorithms/ga_ANN.ipynb))([markdown-version](Genetic_Algorithms/index.html))
 
